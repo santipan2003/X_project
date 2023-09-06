@@ -1,9 +1,10 @@
 import 'package:final_app/screens/editScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:final_app/constants/api.dart';
-import 'package:final_app/register/user.dart';
+import 'package:final_app/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
 
 class BookingListScreen extends StatefulWidget {
   @override

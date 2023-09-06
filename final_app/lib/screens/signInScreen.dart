@@ -5,7 +5,7 @@ import 'package:final_app/constants/api.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:final_app/register/user.dart';
+import 'package:final_app/models/user.dart';
 
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);

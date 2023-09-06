@@ -1,6 +1,6 @@
 import 'package:final_app/constants/api.dart';
 import 'package:final_app/screens/listScreen.dart';
-import 'package:final_app/register/user.dart';
+import 'package:final_app/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

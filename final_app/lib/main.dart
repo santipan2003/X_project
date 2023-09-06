@@ -1,10 +1,7 @@
-import 'package:final_app/screens/bookingScreen.dart';
 import 'package:final_app/screens/mainScreen.dart';
 import 'package:final_app/screens/catalogsScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:final_app/login/signInScreen.dart';
-import 'package:final_app/register/register.dart';
-
+import 'package:final_app/screens/signInScreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +22,6 @@ class MyApp extends StatelessWidget {
       ),
       home: login(),
       routes: {
-        'register': (context) => const register(),
         'login': (context) => const login(),
         'Catalogs': (context) => CatalogsScreen(),
         'homeScreen': (context) => HomeScreen(),
