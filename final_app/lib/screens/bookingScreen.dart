@@ -1,5 +1,5 @@
-import 'package:final_app/api.dart';
-import 'package:final_app/mainscreen/list.dart';
+import 'package:final_app/constants/api.dart';
+import 'package:final_app/screens/listScreen.dart';
 import 'package:final_app/register/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

@@ -1,7 +1,8 @@
-import 'package:final_app/mainscreen/homescreen.dart';
-import 'package:final_app/mainscreen/mainscreen.dart';
+import 'package:final_app/screens/bookingScreen.dart';
+import 'package:final_app/screens/mainScreen.dart';
+import 'package:final_app/screens/catalogsScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:final_app/login/login.dart';
+import 'package:final_app/login/signInScreen.dart';
 import 'package:final_app/register/register.dart';
 
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'register': (context) => const register(),
         'login': (context) => const login(),
-        'MainScreen': (context) => MainScreen(),
+        'Catalogs': (context) => CatalogsScreen(),
         'homeScreen': (context) => HomeScreen(),
       },
     );

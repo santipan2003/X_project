@@ -1,15 +1,15 @@
-import 'package:final_app/api.dart';
-import 'package:final_app/mainscreen/booking_screen.dart';
+import 'package:final_app/constants/api.dart';
+import 'package:final_app/screens/bookingScreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class MainScreen extends StatefulWidget {
+class CatalogsScreen extends StatefulWidget {
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _CatalogsScreenState createState() => _CatalogsScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _CatalogsScreenState extends State<CatalogsScreen> {
   List<dynamic> cars = [];
 
   @override

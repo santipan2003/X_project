@@ -1,6 +1,6 @@
-import 'package:final_app/mainscreen/list.dart';
 import 'package:flutter/material.dart';
-import 'package:final_app/mainscreen/mainscreen.dart';
+import 'package:final_app/screens/listScreen.dart';
+import 'package:final_app/screens/catalogsScreen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0; // ค่าเริ่มต้นของเมนูที่ถูกเลือก
 
   static List<Widget> _widgetOptions = <Widget>[
-    MainScreen(), // เมนูหน้าแสดงรายการรถ
+    CatalogsScreen(), // เมนูหน้าแสดงรายการรถ
     BookingListScreen(), // เมนูอื่นๆ ที่คุณต้องการเพิ่ม
     Placeholder(),
     Placeholder(),
