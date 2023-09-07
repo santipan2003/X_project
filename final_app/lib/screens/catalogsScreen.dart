@@ -22,9 +22,11 @@ class _CatalogsScreenState extends State<CatalogsScreen> {
     final response = await http.get(Uri.parse('$apiEndpoint/car.php'));
     print(response.body);
     if (response.statusCode == 200) {
-      setState(() {
-        cars = json.decode(response.body);
-      });
+      if (mounted) {
+        setState(() {
+          cars = json.decode(response.body);
+        });
+      }
     } else {
       throw Exception('การดึงข้อมูลรถล้มเหลว');
     }
@@ -33,9 +35,6 @@ class _CatalogsScreenState extends State<CatalogsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('ระบบจองรถ'),
-      ),
       body: Center(
         child: ListView.builder(
           itemCount: cars.length,
@@ -62,6 +61,7 @@ class _CatalogsScreenState extends State<CatalogsScreen> {
                       children: [
                         Text('ประเภท: ${cars[index]['cBrand']}'),
                         Text('ขนาด: ${cars[index]['cType']}'),
+                        Text('จำนวนที่นั่ง: ${cars[index]['cPassengers']}'),
                         Text('ราคา: ${cars[index]['cPrice']} บาท'),
                       ],
                     ),

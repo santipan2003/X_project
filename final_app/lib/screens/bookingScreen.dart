@@ -1,8 +1,8 @@
 import 'package:final_app/constants/api.dart';
-import 'package:final_app/screens/listScreen.dart';
 import 'package:final_app/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class BookingScreen extends StatefulWidget {
   final dynamic car;
@@ -63,6 +63,9 @@ class _BookingScreenState extends State<BookingScreen> {
           content: Text('บันทึกข้อมูลการจองรถเรียบร้อย'),
         ),
       );
+
+      // กลับไปยังหน้าก่อนหน้า
+      Navigator.pop(context);
     } else {
       // ไม่สำเร็จ
       ScaffoldMessenger.of(context).showSnackBar(
@@ -88,6 +91,7 @@ class _BookingScreenState extends State<BookingScreen> {
             Text('ชื่อ: ${widget.car['cName']}'),
             Text('ประเภท: ${widget.car['cBrand']}'),
             Text('ขนาด: ${widget.car['cType']}'),
+            Text('จำนวนที่นั่ง: ${widget.car['cPassengers']}'),
             Text('ราคา: ${widget.car['cPrice']} บาท'),
             SizedBox(height: 20),
             Text('วันเวลาเริ่มต้น:'),
@@ -97,7 +101,7 @@ class _BookingScreenState extends State<BookingScreen> {
               },
               child: Text(
                 uDateFrom != null
-                    ? uDateFrom!.toLocal().toString().split(' ')[0]
+                    ? DateFormat('yyyy-MM-dd').format(uDateFrom!)
                     : 'เลือกวันเริ่มต้น',
               ),
             ),
@@ -109,7 +113,7 @@ class _BookingScreenState extends State<BookingScreen> {
               },
               child: Text(
                 uDateTo != null
-                    ? uDateTo!.toLocal().toString().split(' ')[0]
+                    ? DateFormat('yyyy-MM-dd').format(uDateTo!)
                     : 'เลือกวันสิ้นสุด',
               ),
             ),
@@ -130,17 +134,7 @@ class _BookingScreenState extends State<BookingScreen> {
               },
               child: Text('ยืนยันการจองรถ'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          BookingListScreen()), // เปลี่ยนเส้นทางไปยัง ListScreen
-                );
-              },
-              child: Text('ดูรายการการจองของคุณ'),
-            ),
+           
           ],
         ),
       ),

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EditScreen extends StatefulWidget {
   final String uDateFrom;
   final String uDateTo;
+  final Function(Map<String, String>) onSave; // เพิ่มฟังก์ชัน onSave
 
-  EditScreen({required this.uDateFrom, required this.uDateTo});
+  EditScreen({
+    required this.uDateFrom,
+    required this.uDateTo,
+    required this.onSave, // เพิ่มอาร์กิวเมนต์สำหรับ onSave
+  });
 
   @override
   _EditScreenState createState() => _EditScreenState();
@@ -22,13 +28,16 @@ class _EditScreenState extends State<EditScreen> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != DateTime.now())
+    if (picked != null && picked != DateTime.now()) {
+      final formattedDate = DateFormat('yyyy-MM-dd').format(picked);
+      print(
+          'Selected Date From: $formattedDate'); // Debug: Check the selected date
       setState(() {
-        uDateFromController.text = picked.toString();
+        uDateFromController.text = formattedDate;
       });
+    }
   }
 
-  // Function to open the date picker dialog for uDateTo
   Future<void> _selectDateTo(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -36,10 +45,14 @@ class _EditScreenState extends State<EditScreen> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != DateTime.now())
+    if (picked != null && picked != DateTime.now()) {
+      final formattedDate = DateFormat('yyyy-MM-dd').format(picked);
+      print(
+          'Selected Date To: $formattedDate'); // Debug: Check the selected date
       setState(() {
-        uDateToController.text = picked.toString();
+        uDateToController.text = formattedDate;
       });
+    }
   }
 
   @override
@@ -60,7 +73,7 @@ class _EditScreenState extends State<EditScreen> {
         child: Column(
           children: [
             GestureDetector(
-              onTap: () => _selectDateFrom(context), // Open date picker
+              onTap: () => _selectDateFrom(context),
               child: AbsorbPointer(
                 child: TextField(
                   controller: uDateFromController,
@@ -69,7 +82,7 @@ class _EditScreenState extends State<EditScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () => _selectDateTo(context), // Open date picker
+              onTap: () => _selectDateTo(context),
               child: AbsorbPointer(
                 child: TextField(
                   controller: uDateToController,
@@ -79,15 +92,29 @@ class _EditScreenState extends State<EditScreen> {
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () {
-                // Save the edited values and pop the page
-                final newDateFrom = uDateFromController.text;
-                final newDateTo = uDateToController.text;
+              onPressed: () async {
+                final newDateFrom =
+                    DateTime.parse(uDateFromController.text).toLocal();
+                final newDateTo =
+                    DateTime.parse(uDateToController.text).toLocal();
+
+                final formattedDateFrom =
+                    DateFormat('yyyy-MM-dd').format(newDateFrom);
+                final formattedDateTo =
+                    DateFormat('yyyy-MM-dd').format(newDateTo);
+
+                print(
+                    'New Date From: $formattedDateFrom'); // Debug: Check the new date
+                print(
+                    'New Date To: $formattedDateTo'); // Debug: Check the new date
 
                 // Pass the edited values back to the previous screen
-                // Inside EditBookingScreen when you want to send back the data
-                Navigator.pop(
-                    context, {'uDateFrom': newDateFrom, 'uDateTo': newDateTo});
+                widget.onSave({
+                  'uDateFrom': formattedDateFrom,
+                  'uDateTo': formattedDateTo
+                });
+
+                Navigator.pop(context); // ปิดหน้า EditScreen
               },
               child: Text('Save'),
             ),

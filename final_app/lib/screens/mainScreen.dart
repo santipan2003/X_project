@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:final_app/screens/listScreen.dart';
 import 'package:final_app/screens/catalogsScreen.dart';
-
+import 'package:final_app/screens/aboutScreen.dart';
 
 class HomeScreen extends StatefulWidget {
-  
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -16,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
     CatalogsScreen(), // เมนูหน้าแสดงรายการรถ
     BookingListScreen(), // เมนูอื่นๆ ที่คุณต้องการเพิ่ม
     Placeholder(),
-    Placeholder(),
+    AboutScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -29,18 +28,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Car Booking'), // ชื่อแอพลิเคชัน
+        title: Text(
+          'Car Booking',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        automaticallyImplyLeading: false,
       ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'หน้าแรก',
+            label: 'Catalog',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'ค้นหารถ',
+            label: 'List',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_circle),
@@ -48,12 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'โปรไฟล์',
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black, // สีของไอคอนที่ถูกเลือก
-        unselectedItemColor: Colors.black, // สีของไอคอนที่ไม่ถูกเลือก
+        selectedItemColor: Colors.black, 
+        unselectedItemColor: Colors.black, 
         onTap: _onItemTapped,
       ),
     );
