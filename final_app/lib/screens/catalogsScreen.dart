@@ -20,7 +20,6 @@ class _CatalogsScreenState extends State<CatalogsScreen> {
 
   Future<void> fetchCars() async {
     final response = await http.get(Uri.parse('$apiEndpoint/car.php'));
-    print(response.body);
     if (response.statusCode == 200) {
       if (mounted) {
         setState(() {

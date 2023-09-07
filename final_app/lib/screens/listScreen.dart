@@ -110,22 +110,23 @@ class _BookingListScreenState extends State<BookingListScreen> {
 }
 
 
-  // ลบข้อมูลใน table booking โดยเรียกใช้ API ดังนี้
-  Future<void> _deleteBooking(String bID) async {
-    final response = await http.post(
-      Uri.parse('$apiEndpoint/delete_booking.php'),
-      body: {'bID': bID},
-    );
 
-    if (response.statusCode == 200) {
-      setState(() {
-        // ลบข้อมูลการจองที่ตรงกับ bID ออกจากรายการ bookings
-        bookings.removeWhere((booking) => booking['bID'] == bID);
-      });
-    } else {
-      print('Failed to delete booking');
-    }
+  // ลบข้อมูลใน table booking โดยเรียกใช้ API ดังนี้
+Future<void> _deleteBooking(String bID) async {
+  final response = await http.post(
+    Uri.parse('$apiEndpoint/delete_booking.php'),
+    body: {'bID': bID},
+  );
+
+  if (response.statusCode == 200) {
+    setState(() {
+      // ลบข้อมูลการจองที่ตรงกับ bID ออกจากรายการ bookings
+      bookings.removeWhere((booking) => booking['bID'].toString() == bID);
+    });
+  } else {
+    print('Failed to delete booking');
   }
+}
 
   void _showDeleteConfirmationDialog(String bID) {
     showDialog(
@@ -169,6 +170,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
             automaticallyImplyLeading: false,
           ),
           body: ListView.builder(
+            key: UniqueKey(),
             itemCount: bookings.length,
             itemBuilder: (context, index) {
               final booking = bookings[index];

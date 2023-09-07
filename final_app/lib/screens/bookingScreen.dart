@@ -17,33 +17,34 @@ class _BookingScreenState extends State<BookingScreen> {
   DateTime? uDateFrom;
   DateTime? uDateTo;
 
-  Future<void> _selectUDateFrom(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(DateTime.now().year + 1),
-    );
-    if (picked != null && picked != uDateFrom) {
-      setState(() {
-        uDateFrom = picked;
-      });
-    }
+Future<void> _selectUDateFrom(BuildContext context) async {
+  final DateTime? picked = await showDatePicker(
+    context: context,
+    initialDate: DateTime.now(),
+    firstDate: DateTime.now(),
+    lastDate: DateTime(DateTime.now().year + 1),
+  );
+  if (picked != null && picked != uDateFrom) {
+    setState(() {
+      uDateFrom = picked;
+    });
   }
+}
 
-  Future<void> _selectUDateTo(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(DateTime.now().year + 1),
-    );
-    if (picked != null && picked != uDateTo) {
-      setState(() {
-        uDateTo = picked;
-      });
-    }
+Future<void> _selectUDateTo(BuildContext context) async {
+  final DateTime? picked = await showDatePicker(
+    context: context,
+    initialDate: DateTime.now(),
+    firstDate: DateTime.now(),
+    lastDate: DateTime(DateTime.now().year + 1),
+  );
+  if (picked != null && picked != uDateTo) {
+    setState(() {
+      uDateTo = picked;
+    });
   }
+}
+
 
   Future<void> _submitBooking(DateTime uDateFrom, DateTime uDateTo) async {
     final response = await http.post(
